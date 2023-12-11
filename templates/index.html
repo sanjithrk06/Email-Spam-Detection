@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Spam Classifier</title>
+    <script
+      src="https://kit.fontawesome.com/3e2fcc93e8.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="title" content="Landing Page" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap');
+
+
+:root {
+    --purple: #814096;
+    --pink: #f83292;
+    --gradient: linear-gradient(90deg, var(--purple), var(--pink));
+}
+
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--pink);
+    color: #fff;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+body {
+    background: #f9f9f9;
+}
+
+section {
+    min-height: 100vh;
+    padding: 0 9%;
+    padding-top: 7.5rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .8rem 3rem;
+    border-radius: 5rem;
+    background: var(--gradient);
+    font-size: 1.7rem;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    transition: all .3s linear;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.heading {
+    text-align: center;
+    background: var(--gradient);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    padding: 1rem;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 2.5rem;
+    font-weight: 1000;
+    letter-spacing: 3px;
+    color: var(--purple);
+}
+
+header .logo span {
+    color: var(--pink);
+}
+
+header .navbar a {
+    font-size: 1.7rem;
+    margin-left: 1rem;
+    color: var(--purple);
+    padding: 5px;
+}
+
+header .navbar a:hover {
+    color: var(--pink);
+}
+
+
+header input {
+    display: none;
+}
+
+header label {
+    font-size: 3rem;
+    color: var(--purple);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../static/bg-1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.home .image img {
+    width: 40vw;
+    animation: float 3s linear infinite;
+}
+
+@keyframes float {
+
+    0%,
+    10% {
+        transform: translateY(0rem);
+    }
+
+    50% {
+        transform: translateY(-3rem);
+    }
+}
+
+.home .content h3 {
+    font-size: 3.5rem;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.home .content h3 span {
+    font-size: 5.5rem;
+    color: var(--pink);
+    text-transform: uppercase;
+}
+
+.home .content p {
+    font-size: 1.7rem;
+    color: #666;
+    padding: 1rem 0;
+}
+
+.about {
+    background: url() no-repeat;
+    background-color: #fff;
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 3rem;
+}
+
+.about .column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.about .column .image {
+    flex: 1 1 40rem;
+}
+
+.about .column .image img {
+    background-size: cover;
+    background-position: center center;
+    height: 450px;
+    width: 450px;
+}
+
+.about .column .content {
+    flex: 1 1 40rem;
+}
+
+.about .column .content h3 {
+    font-size: 3rem;
+    color: #333;
+}
+
+.about .column .content .results h3 {
+    font-size: 3rem;
+    color: #333;
+}
+
+.about .column .content h1 {
+    font-size: 4.5rem;
+    color: #333;
+}
+
+.about .column .content p {
+    font-size: 1.5rem;
+    color: #333;
+    padding: 1rem 0;
+}
+
+
+
+
+.send {
+    text-align: center;
+    padding: 5rem 0rem;
+    background: url(../static/bg-subs.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.send h3 {
+    color: #fff;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.send p {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 2rem auto;
+    width: 70rem;
+}
+
+
+
+.send form input[type="text"] {
+    width: 70vw;
+    border: 2px solid #fff;
+    padding: .5rem;
+    border-radius: 5rem;
+    margin: 2rem auto;
+    height: 5.5rem;
+}
+
+.send form .ph-send {
+    display: flex;
+    max-width: 80%;
+    border: 2px solid #fff;
+    padding: .5rem;
+    border-radius: 5rem;
+    margin: 2rem auto;
+    height: 5.5rem;
+}
+
+
+.send form input[type="email"] {
+    padding: 0 2rem;
+    font-size: 2rem;
+    background: none;
+    width: 100%;
+    color: #fff;
+    text-transform: none;
+}
+
+.send form input[type="text"] {
+    padding: 0 2rem;
+    font-size: 2rem;
+    background: none;
+    width: 80%;
+    color: #fff;
+    text-transform: none;
+}
+
+.send form input[type="email"]::placeholder {
+    color: #eee;
+    text-transform: capitalize;
+}
+
+.send form input[type="text"]::placeholder {
+    color: #eee;
+    text-transform: capitalize;
+}
+
+.send form input[type="submit"] {
+    background: var(--gradient);
+    position: relative;
+    top: -4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: #fff;
+    height: 4rem;
+    width: 20rem;
+    font-size: 1.7rem;
+    border-radius: 5rem;
+    cursor: pointer;
+}
+
+.check {
+    text-align: center;
+    padding: 5rem 0rem;
+    background: url(../static/bg-subs.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.check h3 {
+    color: #fff;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.check p {
+    color: #fff;
+    font-size: 2rem;
+    margin: 2rem auto;
+    width: 70rem;
+}
+
+
+
+.check form textarea {
+    width: 70vw;
+    border: 2px solid #fff;
+    padding: 2rem;
+    border-radius: 5rem;
+    margin: 2rem auto;
+    height: 30rem;
+}
+
+.check form .ph-send {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 80%;
+    padding: .5rem;
+    border-radius: 5rem;
+    margin: 2rem auto;
+    height: 30rem;
+}
+
+.check form textarea {
+    font-size: 2rem;
+    background: none;
+    width: 100%;
+    color: #fff;
+    text-transform: none;
+}
+
+.check form textarea::placeholder {
+    color: #eee;
+    text-transform: capitalize;
+}
+
+.check form input[type="submit"] {
+    background: var(--gradient);
+    position: relative;
+
+    margin-left: 7px;
+    bottom: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: #fff;
+    height: 4rem;
+    width: 20rem;
+    font-size: 1.7rem;
+    border-radius: 5rem;
+    cursor: pointer;
+}
+
+.footer {
+    padding-top: 3rem;
+    background: url(../static/bg-subs.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.footer .box-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer .box-container .box {
+    flex: 1 1 25rem;
+    margin: 2rem;
+}
+
+.footer .box-container .box h3 {
+    font-size: 2.5rem;
+    padding: 1rem 0;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+}
+
+.footer .box-container .box p {
+    font-size: 1.5rem;
+    padding: .5rem 0;
+    color: #eee;
+}
+
+.footer .box-container .box a {
+    display: block;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    color: #eee;
+}
+
+.footer .box-container .box a:hover {
+    text-decoration: underline;
+}
+
+.footer .box-container .box .info {
+    display: flex;
+    align-items: center;
+}
+
+.footer .box-container .box .info i {
+    margin: 0.5rem 0;
+    margin-right: 1rem;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--pink);
+    font-size: 1.5rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    text-align: center;
+}
+
+.footer .credit {
+    display: block;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: .1rem;
+    color: #fff;
+    border-top: .1rem solid #fff5;
+    padding: 2.5rem 1rem;
+    text-align: center;
+}
+
+
+
+
+
+
+@media (max-width:1200px) {
+
+    html {
+        font-size: 55%;
+    }
+
+}
+
+@media (max-width:990px) {
+    section {
+        padding: 0 3%;
+        padding-top: 7.5rem;
+    }
+
+}
+
+@media (max-width:910px) {
+
+    header label {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem 2rem;
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+        transition: .3s linear;
+    }
+
+    header .navbar a {
+        display: block;
+        margin: 2rem 0;
+        font-size: 2rem;
+    }
+
+    header input:checked~.navbar {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    header input:checked~label::before {
+        content: '\f00d';
+    }
+
+    .home {
+        flex-flow: column-reverse;
+    }
+
+    .home .image img {
+        width: 100%;
+    }
+
+    .home .content h3 {
+        font-size: 3.5rem;
+    }
+
+    .about {
+        background-position: right;
+    }
+
+    .send p {
+        width: auto;
+    }
+}
+
+@media (max-width:450px) {
+
+    html {
+        font-size: 50%;
+    }
+
+    .about .column .content .buttons a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about .column .content.buttons a:last-child {
+        margin: 1rem 0;
+    }
+
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo"><span>Email Spam</span> Classifier</a>
+
+      <input type="checkbox" id="menu-bar" />
+      <label for="menu-bar" class="fa-solid fa-bars"></label>
+
+      <nav class="navbar">
+        <a href="#home">HOME</a>
+        <a href="#check">CHECK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#footer">CONTACT</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="home" id="home">
+        
+        <div class="content">
+          <h3>Best Platform to <br>Find <span>Spam or Not</span></h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quibusdam perspiciatis, natus id, cum est laborum vel ipsam ullam suscipit eligendi architecto facere?
+          </p>
+          <a href="#check" class="btn">Check it!</a>
+        </div>
+        
+        <div class="image">
+        <img src="{{ url_for('static', filename='headImg.png') }}" alt="" />
+        </div>
+      </section>
+
+
+      <div class="check" id="check">
+        <h3>Check Spam or Not</h3>
+        <p>
+          Type an Email here to check it is Spam or Not
+        </p>
+        <form action="/" method="POST">
+          <div class="ph-send">
+            <textarea name="email" id="email" cols="30" rows="10"></textarea>
+            <button class="btn">Check</button>
+          </div>
+        </form>
+      </div>
+
+
+
+      <section class="about" id="about">
+        <h1 class="heading">about me</h1>
+
+        <div class="column">
+          <div class="image">
+            <img src="{{ url_for('static', filename='about.png') }}" alt="" />
+          </div>
+
+          <div class="content">
+            <h3>Email Spam Dectector</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum,
+              voluptatum placeat amet eaque repudiandae ad minima saepe repellat
+              iure neque.
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure
+              provident sunt earum voluptatibus nostrum libero, pariatur illum
+              quaerat magni cum!
+            </p>
+            <div class="buttons">
+              <a href="#check" class="btn">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="send">
+        <h3>Get in Touch</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime non
+          mollitia, doloremque, accusamus hic dolorem illum sed deserunt
+          repudiandae eligendi provident ab, quas possimus atque!
+        </p>
+        <form action="">
+          <input type="text" placeholder="Enter Your Name" required />
+          <div class="ph-send">
+            <input
+              type="email"
+              placeholder="Enter Your Email Address"
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+              required
+            />
+            <input class="btn" type="submit" value="Send" />
+          </div>
+        </form>
+      </div>
+
+      <div class="footer">
+
+        <div class="box-container">
+
+          <div class="box">
+            <h3>about us</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit incidunt sequi earum id maiores doloribus, ipsum quidem quaerat!</p>
+          </div>
+
+          <div class="box">
+            <h3>quick links</h3>
+            <a href="#home">home</a>
+            <a href="#check">check</a>
+            <a href="#about">about</a>
+          </div>
+          
+          <div class="box">
+            <h3>follow us</h3>
+            <a href="#">instagram</a>
+          </div>
+          
+          <div class="box">
+            <h3>contact info</h3>
+            <div class="info">
+              <i class="fas fa-phone"></i>
+              <p>9234567890</p>
+            </div>
+            <div class="info">
+              <i class="fas fa-envelope"></i>
+              <p>esd123@gmail.com <br> esd123@gmail.com</p>
+            </div>
+            <div class="info">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>salem, Tamilnadu - 636002</p>
+            </div>
+          </div>
+        </div>
+
+        <h class="credit">&copy; copyright @2023</h>
+      </div>
+
+
+
+    </main>
+  </body>
+</html>
