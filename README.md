@@ -29,5 +29,4 @@ This project is an Email Spam Detection system built using machine learning tech
 4. View the classification result (spam or not spam) and the associated metrics.
 
 ---
-
-*Feel free to reach out through the contact form on the [Email Spam Detection Website](https://spam-detection.example.com/) or connect with us on social media.
+*Feel free to reach out through the contact form in [My Portfolio](https://sanjith-portfolio.netlify.app/) or connect with me on social media.
